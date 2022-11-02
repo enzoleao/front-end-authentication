@@ -9,11 +9,18 @@ import Select from '@mui/material/Select';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, ptBR} from '@mui/x-date-pickers';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import bgLocale from 'date-fns/locale/bg';
+import Axios from "axios"
 
 function Agendamento() {
   
+  const isWeekend = (date) => {
+    const day = date.day();
+    
+    return day === 0 || day === 6;
+  };
+  function disablePrevDates() {
+    return date.getDay() === 0;
+  }
   const [value, setValue] = React.useState(null);
   const [values, setValues] = React.useState({
     nome: '',
@@ -27,13 +34,16 @@ function Agendamento() {
     horario:'',
  
   });
-  const theme = createTheme(
-    {
-      palette: {
-        primary: {main: '#1976d2'}
-      }
-    }
-  )
+  const enviarAgend=()=>{
+      Axios.post("http://localhost:3001/agend", {
+        values,
+        value
+      }).then((res)=>{
+        alert("AGENDADO COM SUCESSO")
+      }).catch((err)=>{
+        alert(err.response.data.message)
+      })
+  }
 
   const handleChangeVal = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -140,10 +150,14 @@ function Agendamento() {
                       <LocalizationProvider       
                           dateAdapter={AdapterDayjs}>
                             <DatePicker
+                            	disablePast
+                              shouldDisableDate={isWeekend}
+                              openTo="day"
+                              inputFormat="DD-MM-YYYY"
                               label="Escolha a Data"
                               value={value}
                               onChange={(newValue) => {
-                                setValue(newValue);
+                                setValue(newValue.format("MM-DD-YYYY").toString());
                               
                               }
                               
@@ -188,7 +202,7 @@ function Agendamento() {
               
             </div>
             <div>
-                 <button className=" w-44 h-10 rounded-md mb-5 bg-slate-700 text-white border shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-slate-400">Enviar</button>
+                 <button onClick={enviarAgend} className=" w-44 h-10 rounded-md mb-5 bg-slate-700 text-white border shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-slate-400">Enviar</button>
             </div>
         </div>
   )
