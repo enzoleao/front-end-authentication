@@ -35,7 +35,7 @@ function Agendamento() {
  
   });
   const enviarAgend=()=>{
-      Axios.post("http://localhost:3001/agend", {
+      Axios.post("http://191.101.78.120:3001/agend", {
         values,
         value
       }).then((res)=>{
