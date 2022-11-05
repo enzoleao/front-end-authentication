@@ -7,12 +7,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider, ptBR} from '@mui/x-date-pickers';
+import { LocalizationProvider} from '@mui/x-date-pickers';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Axios from "axios"
+import Brasao from '../../public/brasao_pmpa.png'
+import 'dayjs/locale/pt-br'
 
+const locales = ['pt-br']
 function Agendamento() {
-  
+  const [locale, setLocale] = React.useState('pt-br');
+
   const isWeekend = (date) => {
     const day = date.day();
     
@@ -35,11 +39,12 @@ function Agendamento() {
  
   });
   const enviarAgend=()=>{
-      Axios.post("http://191.101.78.120:3001/agend", {
+      Axios.post("http://localhost:3001/agend", {
         values,
         value
       }).then((res)=>{
         alert("AGENDADO COM SUCESSO")
+       
       }).catch((err)=>{
         alert(err.response.data.message)
       })
@@ -51,7 +56,8 @@ function Agendamento() {
   
 
   return (
-
+      <div className='h-screen min-h-full w-screen md:w-full flex flex-col  justify-between items-center'>
+        <img src={Brasao} style={{width:'100px'}}></img>
         <div className="flex flex-col w-screen  md:w-[55rem] h-[44rem] space-y-4 mb-20 items-center  rounded-md shadow-2xl">
           
             <div className="flex flex-col flex-grow w-full items-center space-y-5">
@@ -148,7 +154,9 @@ function Agendamento() {
                 <div className="flex  w-5/6 text-white justify-between">
                   <div className="flex flex-col">
                       <LocalizationProvider       
-                          dateAdapter={AdapterDayjs}>
+                          dateAdapter={AdapterDayjs}
+                          adapterLocale={locale}
+                          >
                             <DatePicker
                             	disablePast
                               shouldDisableDate={isWeekend}
@@ -157,10 +165,8 @@ function Agendamento() {
                               label="Escolha a Data"
                               value={value}
                               onChange={(newValue) => {
-                                setValue(newValue.format("MM-DD-YYYY").toString());
-                              
-                              }
-                              
+                                setValue(newValue.format("MM-DD-YYYY").toString());    
+                              }          
                             }
 
                               renderInput={(params) => 
@@ -205,6 +211,7 @@ function Agendamento() {
                  <button onClick={enviarAgend} className=" w-44 h-10 rounded-md mb-5 bg-slate-700 text-white border shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-slate-400">Enviar</button>
             </div>
         </div>
+      </div>
   )
 }
 

@@ -25,6 +25,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.38.0",
     "react-imask": "^6.4.3",
+    "react-router": "^6.4.3",
+    "react-router-dom": "^6.4.3",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
