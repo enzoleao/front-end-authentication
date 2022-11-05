@@ -8,11 +8,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Axios from 'axios';
+import {useContext} from "react"
+import { AuthContext } from '../../contexts/auth';
 
 export default function Dashboard(){
   const [agendados, setAgendados] = React.useState(1);
   const [open, setOpen] = React.useState(false);    
   const [novoRg,setNovoRg] = React.useState('');
+  const {logout} = useContext(AuthContext);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,6 +24,9 @@ export default function Dashboard(){
   const handleClose = () => {
     setOpen(false);
   };
+  const handleLogout = ()=>{
+    logout();
+  }
   const cadastrarRg =()=>{
       Axios.post("http://localhost:3001/inserirrgnovo",{
         novoRg
@@ -34,7 +40,7 @@ export default function Dashboard(){
   }
     return (
         <div className="h-screen min-h-full w-screen md:w-full flex flex-col ">
-            <div className="w-full h-14 bg-slate-700"></div>
+            <div className="w-full flex justify-end items-center px-2 h-14 bg-slate-700 "><Button onClick={handleLogout} variant="contained" color="error">Sair</Button></div>
               <div className='w-full flex flex-col justify-center items-center space-y-2 mt-36'>
                 <div className='flex space-x-2'>
                     <Button variant="outlined" onClick={()=>setAgendados(1)}>AGENDADOS</Button>

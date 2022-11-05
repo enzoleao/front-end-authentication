@@ -27,6 +27,15 @@ export default function Tablergs(){
           alert(err.response.data.message)
         })
       };
+      const deletarRg = ()=>{
+        Axios.delete(`http://localhost:3001/apagaridregistrado/${values.id}`)
+        .then((res)=>{
+          alert("Deletado com sucesso")
+          setOpen(false)
+        }).catch((err)=>{
+          alert(err.response.data.message)
+        })
+      }
       const handleChangeVal = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -92,7 +101,7 @@ export default function Tablergs(){
                   </DialogContent>
                   <DialogActions>
                     <Button variant="outlined" onClick={handleClose}>Cancel</Button>
-                    <Button color="error"  variant="outlined" onClick={handleClose}>Excluir</Button>
+                    <Button color="error"  variant="outlined" onClick={deletarRg}>Excluir</Button>
                     <Button color="success" variant="outlined" onClick={handleEditSubmit}>Salvar</Button>
                   </DialogActions>
                 </Dialog>

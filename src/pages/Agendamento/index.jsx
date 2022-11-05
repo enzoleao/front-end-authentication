@@ -44,7 +44,7 @@ function Agendamento() {
         value
       }).then((res)=>{
         alert("AGENDADO COM SUCESSO")
-       
+        window.location.replace('/')
       }).catch((err)=>{
         alert(err.response.data.message)
       })

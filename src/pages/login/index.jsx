@@ -1,43 +1,45 @@
 import {iconUser} from "../icons"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import {useState} from "react"
+import React, {useState, useContext} from "react"
+import { AuthContext } from "../../contexts/auth";
 import Brasao from '../../public/brasao_pmpa.png'
 export default function Login(){
-    const [values, setValues] = useState({
-        usuario:'',
-        password:''
-    });
-    const handleChangeVal = (prop) => (event) => {
-      setValues({ ...values, [prop]: event.target.value });
-        
-    };
+    const {authenticated, login} = useContext(AuthContext);
+    const [usuario, setUsuario] = useState("");
+    const [password, setPassword] = useState("");
+    
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        login(usuario,password)   
+    }
     return (
         <div className='h-screen min-h-full w-screen md:w-full flex flex-col py-20 items-center'>
         <img src={Brasao} className="" style={{width:'100px'}}></img>
         <div className="flex flex-col justify-center space-y-36 w-[30rem] h-[38rem] rounded-md shadow shadow-2xl ">
             <div className="w-full flex justify-center mt-10">{iconUser}</div>
             <div className="w-full flex flex-col h-[20rem] space-y-7">
-
                 <div className="w-full flex justify-center">   
                     <TextField 
                         id="usuario" 
-                        label="Usuário" 
+                        label="Usuário"
+                        value={usuario}
                         variant="standard" 
-                        onChange={handleChangeVal('usuario')}
+                        onChange={(e)=>setUsuario(e.target.value)}
                     />
                 </div>
                 <div className="w-full flex justify-center">   
                     <TextField 
                         id="standard-basic" 
-                        label="Senha" 
+                        label="Senha"
+                        value={password}
                         variant="standard" 
                         type="password"
-                        onChange={handleChangeVal('password')}
+                        onChange={(e)=>setPassword(e.target.value)}
                     />
                 </div>
                 <div className="w-full flex justify-center pt-10">   
-                <Button onClick={()=>console.log(values)}variant="outlined">Login</Button>
+                <Button onClick={handleSubmit} variant="outlined">Login</Button>
                 </div>
             </div>
     
