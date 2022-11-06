@@ -43,13 +43,13 @@ export default function Table(){
        
     const [listAgends, setListAgends] = React.useState();
     React.useEffect(()=>{
-        Axios.get("http://191.101.78.120:3001/getinfo")
+        Axios.get("https://191.101.78.120:3001/getinfo")
         .then((response)=>{
           setListAgends(response.data)
         }); 
       },[])
     const HandleEdit = () =>{
-      Axios.put("http://191.101.78.120:3001/atualizaragendamento",{
+      Axios.put("https://191.101.78.120:3001/atualizaragendamento",{
         values,
         value
       }).then((res)=>{
@@ -61,7 +61,7 @@ export default function Table(){
       })
     }
     const handleDelete = () =>{
-      Axios.delete(`http://191.101.78.120:3001/apagaragendamento/${values.id}`)
+      Axios.delete(`https://191.101.78.120:3001/apagaragendamento/${values.id}`)
       .then((res)=>{
         alert("DELETADO COM SUCESSO")
         setOpen(false)

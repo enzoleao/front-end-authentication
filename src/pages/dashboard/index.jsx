@@ -28,7 +28,7 @@ export default function Dashboard(){
     logout();
   }
   const cadastrarRg =()=>{
-      Axios.post("http://191.101.78.120:3001/inserirrgnovo",{
+      Axios.post("https://191.101.78.120:3001/inserirrgnovo",{
         novoRg
       }).then((response)=>{
         alert("RG INSERIDO COM SUCESSO")
