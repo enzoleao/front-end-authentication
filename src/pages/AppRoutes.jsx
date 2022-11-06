@@ -20,7 +20,7 @@ function AppRoutes() {
         return children;
       }
     return(
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <AuthProvider>
             <Routes>
                 <Route path='/' element={<Agendamento/>}/>
