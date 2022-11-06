@@ -18,7 +18,7 @@ export default function Tablergs(){
   const [listRgs, setListRgs] = React.useState();
   
       const handleEditSubmit = () => {
-        Axios.put("https://191.101.78.120:3001/atualizarrg",{
+        Axios.put("https://191.101.78.120:3000/atualizarrg",{
           values
         }).then((response)=>{
           alert("Alterado com sucesso!")
@@ -28,7 +28,7 @@ export default function Tablergs(){
         })
       };
       const deletarRg = ()=>{
-        Axios.delete(`https://191.101.78.120:3001/apagaridregistrado/${values.id}`)
+        Axios.delete(`https://191.101.78.120:3000/apagaridregistrado/${values.id}`)
         .then((res)=>{
           alert("Deletado com sucesso")
           setOpen(false)
@@ -47,7 +47,7 @@ export default function Tablergs(){
       };
 
     React.useEffect(()=>{
-        Axios.get("https://191.101.78.120:3001/getallrgs")
+        Axios.get("https://191.101.78.120:3000/getallrgs")
         .then((response)=>{
             setListRgs(response.data)
         }); 
