@@ -229,7 +229,7 @@ function Agendamento() {
               
             </div>
             <div className="flex pb-5">
-                <Button color="success" type="submit" sx={{width:'150px'}} onClick={enviarAgend} variant="outlined">Agendar</Button>
+                <Button color="success" type="submit" sx={{width:'150px'}} onclick={enviarAgend} variant="outlined">Agendar</Button>
             </div>
         </div>
       </div>
