@@ -181,7 +181,6 @@ function Agendamento() {
                             <DatePicker
                             	disablePast
                               shouldDisableDate={isWeekend}
-                              openTo="day"
                               inputFormat="DD-MM-YYYY"
                               label="Escolha a Data"
                               value={value}
