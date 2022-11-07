@@ -69,7 +69,7 @@ function Agendamento() {
                 
                 <div>
                   { erro == 1? 
-                    <div className="flex items-center bg-red-200 w-50 h-10 px-2 px-2 rounded-md mt-2">
+                    <div className="flex items-center bg-red-200 shadow shadow-xl w-50 h-10 px-2 px-2 rounded-md mt-2">
                         <p className="text-wh">{erroNome} !</p>
                     </div>
                     :<div></div>          
@@ -229,7 +229,7 @@ function Agendamento() {
               
             </div>
             <div className="flex pb-5">
-                <Button color="success" sx={{width:'150px'}} onClick={enviarAgend} variant="outlined">Agendar</Button>
+                <Button color="success" type="submit" sx={{width:'150px'}} onClick={enviarAgend} variant="outlined">Agendar</Button>
             </div>
         </div>
       </div>
