@@ -43,17 +43,18 @@ export default function Table(){
        
     const [listAgends, setListAgends] = React.useState();
     React.useEffect(()=>{
-        Axios.get("https://191.101.78.120:3001/getinfo")
+        Axios.get("https://191.101.78.120:3000/getinfo")
         .then((response)=>{
           setListAgends(response.data)
         }); 
       },[])
     const HandleEdit = () =>{
-      Axios.put("https://191.101.78.120:3001/atualizaragendamento",{
+      Axios.put("https://191.101.78.120:3000/atualizaragendamento",{
         values,
         value
       }).then((res)=>{
         alert("REMARCADO COM SUCESSO")
+        window.location.replace('/dashboard')
         setOpen(false);
         
       }).catch((err)=>{
@@ -61,10 +62,11 @@ export default function Table(){
       })
     }
     const handleDelete = () =>{
-      Axios.delete(`https://191.101.78.120:3001/apagaragendamento/${values.id}`)
+      Axios.delete(`https://191.101.78.120:3000/apagaragendamento/${values.id}`)
       .then((res)=>{
         alert("DELETADO COM SUCESSO")
         setOpen(false)
+        window.location.replace('/dashboard')
       }).catch((err)=>{
         alert(err.response.data.message)
       })
@@ -72,12 +74,12 @@ export default function Table(){
       const columns = [
         { field: 'id', headerName: 'ID', width: 70},
         { field: 'nome', headerName: 'Nome', width: 300 },
-        { field: 'rg',headerName: 'RG', width: 90},
+        { field: 'rg',headerName: 'CPF', width: 130},
         { field: 'patente',headerName: 'Patente', width: 140},
         { field: 'telefone',headerName: 'Telefone', width: 140},
         { field: 'modelo',headerName: 'Modelo', width: 90 },
         { field: 'lotacao',headerName: 'Lotacao', width: 90},
-        { field: 'pa',headerName: 'P.A', width: 90},
+        { field: 'pa',headerName: 'P.A', width: 40},
         { field: 'data',headerName: 'Data', width: 140},
         { field: 'horario',headerName: 'Horario', width: 90},
         { field: 'Acoes', headerName: 'Acoes', width:90,

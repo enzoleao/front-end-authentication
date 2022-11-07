@@ -31,8 +31,9 @@ export default function Dashboard(){
       Axios.post("https://191.101.78.120:3000/inserirrgnovo",{
         novoRg
       }).then((response)=>{
-        alert("RG INSERIDO COM SUCESSO")
+        alert("CPF INSERIDO COM SUCESSO")
         setOpen(false);
+        window.location.replace('/dashboard')
       }).catch((err)=>{
         alert(err.response.data.message)
       })
@@ -44,8 +45,8 @@ export default function Dashboard(){
               <div className='w-full flex flex-col justify-center items-center space-y-2 mt-36'>
                 <div className='flex space-x-2'>
                     <Button variant="outlined" onClick={()=>setAgendados(1)}>AGENDADOS</Button>
-                    <Button variant="outlined" onClick={()=>setAgendados(0)}>RG'S CADASTRADOS</Button>
-                    {agendados===1 ? <></> : <Button variant="outlined" color="success" onClick={()=>setOpen(true)}>ADICIONAR RG</Button>}
+                    <Button variant="outlined" onClick={()=>setAgendados(0)}>CPF'S CADASTRADOS</Button>
+                    {agendados===1 ? <></> : <Button variant="outlined" color="success" onClick={()=>setOpen(true)}>ADICIONAR CPF</Button>}
                 </div>
                 <div className='flex shadow shadow-2xl text-center h-[34rem] w-full md:w-[84rem]'>
                         {agendados===1? 
@@ -57,7 +58,7 @@ export default function Dashboard(){
               </div>            
               <div>
                 <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>ADICIONAR NOVO RG</DialogTitle>
+                    <DialogTitle>ADICIONAR NOVO CPF</DialogTitle>
                     <DialogContent>
                     
                     <TextField
@@ -65,7 +66,7 @@ export default function Dashboard(){
                         margin="dense"
                         id="rg"
                         value={novoRg}
-                        label="Insira o RG"
+                        label="Insira o CPF"
                         type="number"
                         fullWidth
                         onChange={(e)=>setNovoRg(e.target.value)}

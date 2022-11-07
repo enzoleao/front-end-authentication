@@ -23,6 +23,7 @@ export default function Tablergs(){
         }).then((response)=>{
           alert("Alterado com sucesso!")
           setOpen(false);
+          window.location.replace('/dashboard')
         }).catch((err)=>{
           alert(err.response.data.message)
         })
@@ -30,8 +31,9 @@ export default function Tablergs(){
       const deletarRg = ()=>{
         Axios.delete(`https://191.101.78.120:3000/apagaridregistrado/${values.id}`)
         .then((res)=>{
-          alert("Deletado com sucesso")
+          alert("Deletado com sucesso")        
           setOpen(false)
+          window.location.replace('/dashboard')
         }).catch((err)=>{
           alert(err.response.data.message)
         })
@@ -47,7 +49,7 @@ export default function Tablergs(){
       };
 
     React.useEffect(()=>{
-        Axios.get("https://191.101.78.120:3000/getallrgs")
+        Axios.get("https://191.101.78.120:3000/getallcpf")
         .then((response)=>{
             setListRgs(response.data)
         }); 
@@ -55,7 +57,7 @@ export default function Tablergs(){
     
       const columns = [
         { field: 'id', headerName: 'ID', width: 70},
-        { field: 'rg',headerName: 'RG', width: 90},     
+        { field: 'rg',headerName: 'CPF', width: 140},     
         { field: 'Acoes', headerName: 'Acoes', width:90,
         renderCell: () => (
           <strong>
@@ -92,7 +94,7 @@ export default function Tablergs(){
                         autoFocus
                         margin="dense"
                         id="rg"
-                        label="INSIRA O RG"
+                        label="INSIRA O CPF"
                         onChange={handleChangeVal("rg")}
                         type="number"                   
                         variant="standard"
@@ -106,10 +108,11 @@ export default function Tablergs(){
                   </DialogActions>
                 </Dialog>
         
-        <DataGrid sx={{textAlign:'center'}}
+        <DataGrid 
+            
             rows={typeof listRgs !== "undefined" && listRgs.map((value)=>{
             return (
-                {id:value.id, rg:value.rg
+                {id:value.id, rg:value.cpf
                 }
                 )
             })}

@@ -12,6 +12,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Axios from "axios"
 import Brasao from '../../public/brasao_pmpa.png'
 import 'dayjs/locale/pt-br'
+import Button from '@mui/material/Button';
 
 const locales = ['pt-br']
 function Agendamento() {
@@ -58,9 +59,9 @@ function Agendamento() {
   return (
       <div className='h-screen min-h-full w-screen md:w-full flex flex-col  justify-between items-center'>
         <img src={Brasao} style={{width:'100px'}}></img>
-        <div className="flex flex-col w-screen  md:w-[55rem] h-[44rem] space-y-4 mb-20 items-center  rounded-md shadow-2xl">
+        <div className="flex flex-col w-screen  md:w-[55rem] h-[44rem] space-y-4 mb-20 items-center  rounded-md shadow-2xl min-h-[42rem]">
           
-            <div className="flex flex-col flex-grow w-full items-center space-y-5">
+            <div className="flex flex-col flex-grow w-full items-center space-y-5 ">
 
                 <div className="flex flex-col w-5/6 text-white mt-10">
                   <TextField
@@ -74,11 +75,11 @@ function Agendamento() {
                 <div className="flex flex-col w-5/6 text-white">
                   <TextField
                     id="rg"
-                    label="RG"
+                    label="CPF"
                     type="number"
                     variant="standard"
                     onChange={handleChangeVal('rg')}
-                    sx={{width:'120px'}}
+                    sx={{width:'140px'}}
                   />
                 </div>
                 <div className="flex flex-col w-5/6 text-white">
@@ -207,8 +208,8 @@ function Agendamento() {
                 </div>
               
             </div>
-            <div>
-                 <button onClick={enviarAgend} className=" w-44 h-10 rounded-md mb-5 bg-slate-700 text-white border shadow-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-slate-400">Enviar</button>
+            <div className="flex pb-5">
+                <Button color="success" sx={{width:'150px'}} onClick={enviarAgend} variant="outlined">Agendar</Button>
             </div>
         </div>
       </div>
