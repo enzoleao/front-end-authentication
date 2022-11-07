@@ -17,7 +17,8 @@ import Button from '@mui/material/Button';
 const locales = ['pt-br']
 function Agendamento() {
   const [locale, setLocale] = React.useState('pt-br');
-
+  const [erro, setErro] = React.useState(null)
+  const [erroNome, setErroNome] = React.useState(null)
   const isWeekend = (date) => {
     const day = date.day();
     
@@ -46,8 +47,11 @@ function Agendamento() {
       }).then((res)=>{
         alert("AGENDADO COM SUCESSO")
         window.location.replace('/')
+        setErro(2)
       }).catch((err)=>{
         alert(err.response.data.message)
+        setErroNome(err.response.data.message)
+        setErro(1)
       })
   }
 
@@ -62,6 +66,22 @@ function Agendamento() {
         <div className="flex flex-col w-screen  md:w-[55rem] h-[44rem] space-y-4 mb-20 items-center  rounded-md shadow-2xl min-h-[42rem]">
           
             <div className="flex flex-col flex-grow w-full items-center space-y-5 ">
+                
+                <div>
+                  { erro == 1? 
+                    <div className="flex items-center bg-red-200 w-50 h-10 px-2 px-2 rounded-md mt-2">
+                        <p className="text-wh">{erroNome} !</p>
+                    </div>
+                    :<div></div>          
+                }
+                {
+                  erro == 2 ? 
+                  <div className="flex bg-green-200 w-50 h-10 px-2 rounded-md mt-2 items-center">
+                     <p className="text-wh">Agendados com sucesso !</p>
+                  </div>:
+                  <div></div> 
+                }
+                </div>
 
                 <div className="flex flex-col w-5/6 text-white mt-10">
                   <TextField
