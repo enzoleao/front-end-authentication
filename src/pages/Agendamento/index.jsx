@@ -27,7 +27,7 @@ function Agendamento() {
   function disablePrevDates() {
     return date.getDay() === 0;
   }
-  const [newValue, setNewValue] = React.useState(null);
+  const [newData, setNewData] = React.useState(null);
   const [values, setValues] = React.useState({
     nome: '',
     rg: '',
@@ -41,7 +41,7 @@ function Agendamento() {
  
   });
   const enviarAgend=()=>{
-      const value = `${newValue.$D}/${newValue.$M}/${newValue.$y}`
+      const value = `${newData.$D}/${newData.$M}/${newData.$y}`
       Axios.post("https://191.101.78.120:3000/agend", {
         values,
         value
@@ -184,9 +184,9 @@ function Agendamento() {
                               shouldDisableDate={isWeekend}
                               inputFormat="DD/MM/YYYY"
                               label="Escolha a Data"
-                              value={newValue}
+                              value={newData}
                               onChange={(newValue) => {
-                                setNewValue(newValue);    
+                                setNewData(newValue);    
                               }          
                             }
 
