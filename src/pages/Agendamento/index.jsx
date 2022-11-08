@@ -184,7 +184,7 @@ function Agendamento() {
                               shouldDisableDate={isWeekend}
                               inputFormat="DD/MM/YYYY"
                               label="Escolha a Data"
-                              value={value}
+                              value={newValue}
                               onChange={(newValue) => {
                                 setNewValue(newValue);    
                               }          
