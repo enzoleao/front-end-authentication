@@ -41,7 +41,7 @@ function Agendamento() {
  
   });
   const enviarAgend=()=>{
-      const value = `${value.$D}/${value.$M}/${value.$y}`
+      const value = `${newValue.$D}/${newValue.$M}/${newValue.$y}`
       Axios.post("https://191.101.78.120:3000/agend", {
         values,
         value
