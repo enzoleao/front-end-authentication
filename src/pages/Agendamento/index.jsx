@@ -27,7 +27,7 @@ function Agendamento() {
   function disablePrevDates() {
     return date.getDay() === 0;
   }
-  const [value, setValue] = React.useState(null);
+  const [newValue, setNewValue] = React.useState(null);
   const [values, setValues] = React.useState({
     nome: '',
     rg: '',
@@ -41,7 +41,7 @@ function Agendamento() {
  
   });
   const enviarAgend=()=>{
-      const newValue = `${value.$D}/${value.$M}/${value.$y}`
+      const value = `${value.$D}/${value.$M}/${value.$y}`
       Axios.post("https://191.101.78.120:3000/agend", {
         values,
         newValue
@@ -186,7 +186,7 @@ function Agendamento() {
                               label="Escolha a Data"
                               value={value}
                               onChange={(newValue) => {
-                                setValue(newValue);    
+                                setNewValue(newValue);    
                               }          
                             }
 
