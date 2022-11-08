@@ -41,9 +41,10 @@ function Agendamento() {
  
   });
   const enviarAgend=()=>{
+      const newValue = `${value.$D}/${value.$M}/${value.$y}`
       Axios.post("https://191.101.78.120:3000/agend", {
         values,
-        value
+        newValue
       }).then((res)=>{
         alert("AGENDADO COM SUCESSO")
         window.location.replace('/')
@@ -185,7 +186,7 @@ function Agendamento() {
                               label="Escolha a Data"
                               value={value}
                               onChange={(newValue) => {
-                                setValue(newValue.format("MM-DD-YYYY").toString());    
+                                setValue(newValue);    
                               }          
                             }
 
