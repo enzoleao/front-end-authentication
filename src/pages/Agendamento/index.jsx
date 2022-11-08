@@ -182,7 +182,7 @@ function Agendamento() {
                             <DatePicker
                             	disablePast
                               shouldDisableDate={isWeekend}
-                              inputFormat="DD-MM-YYYY"
+                              inputFormat="DD/MM/YYYY"
                               label="Escolha a Data"
                               value={value}
                               onChange={(newValue) => {
