@@ -44,7 +44,7 @@ function Agendamento() {
       const value = `${value.$D}/${value.$M}/${value.$y}`
       Axios.post("https://191.101.78.120:3000/agend", {
         values,
-        newValue
+        value
       }).then((res)=>{
         alert("AGENDADO COM SUCESSO")
         window.location.replace('/')
