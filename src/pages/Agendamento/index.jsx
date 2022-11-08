@@ -107,7 +107,7 @@ function Agendamento() {
                   <TextField
                     id="telefone"
                     label="Telefone (DD) + TEL"
-                    type="text"
+                    type="number"
                     variant="standard"
                     onChange={handleChangeVal('telefone')}
                     sx={{width:"200px"}}
