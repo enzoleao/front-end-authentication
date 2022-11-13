@@ -45,11 +45,12 @@ function Agendamento() {
     pa:'',
     data:'',
     horario:'',
+    polo:''
  
   });
   const enviarAgend=()=>{
       const value = `${newData.$D}/${newData.$M}/${newData.$y}`
-      Axios.post("https://191.101.78.120:3000/agend", {
+      Axios.post("https://localhost:3000/agend", {
         values,
         value
       }).then((res)=>{
@@ -208,7 +209,21 @@ function Agendamento() {
                       </Select>
                   </FormControl>
                 </div>
-                <div className="flex flex-col w-5/6 text-white">
+                <div className="flex flex-row justify-between w-5/6 text-white">
+                <FormControl variant="standard">
+                      <InputLabel id="pa">Polo de Atendimento</InputLabel>
+                      <Select
+                        labelId="polo"
+                        id="pa"
+                        value={values.polo}
+                        onChange={handleChangeVal('polo')}
+                        sx={{width:'170px'}}
+                      > 
+                        <MenuItem value="BELEM - QCG">BELEM - QCG</MenuItem>
+                        <MenuItem value="ALTAMIRA">ALTAMIRA</MenuItem>
+                        <MenuItem value="MARABA">MARABA</MenuItem>
+                      </Select>
+                  </FormControl>
                   <FormControl variant="standard">
                       <InputLabel id="pa">P.A</InputLabel>
                       <Select
@@ -222,6 +237,7 @@ function Agendamento() {
                         <MenuItem value="2">2</MenuItem>
                       </Select>
                   </FormControl>
+                  
                 </div>
                 <div className="flex  w-5/6 text-white justify-between">
                   <div className="flex flex-col">
@@ -232,6 +248,7 @@ function Agendamento() {
                             <DatePicker
                             	disablePast
                               shouldDisableDate={isWeekend}
+                              
                               inputFormat="DD/MM/YYYY"
                               label="Escolha a Data"
                               value={newData}
