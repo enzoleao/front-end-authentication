@@ -12,11 +12,18 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Axios from "axios"
 import Brasao from '../../public/brasao_pmpa.png'
 import 'dayjs/locale/pt-br'
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
+
+
 
 const locales = ['pt-br']
 function Agendamento() {
   const [locale, setLocale] = React.useState('pt-br');
+  const [open, setOpen] = React.useState(false);
   const [erro, setErro] = React.useState(null)
   const [erroNome, setErroNome] = React.useState(null)
   const isWeekend = (date) => {
@@ -50,9 +57,9 @@ function Agendamento() {
         window.location.replace('/')
         setErro(2)
       }).catch((err)=>{
-        alert(err.response.data.message)
         setErroNome(err.response.data.message)
         setErro(1)
+        setOpen(true)
       })
   }
 
@@ -64,26 +71,66 @@ function Agendamento() {
   return (
       <div className='h-screen min-h-full w-screen md:w-full flex flex-col  justify-between items-center'>
         <img src={Brasao} style={{width:'100px'}}></img>
-        <div className="flex flex-col w-screen  md:w-[55rem] h-[44rem] space-y-4 mb-20 items-center  rounded-md shadow-2xl min-h-[42rem]">
-          
-            <div className="flex flex-col flex-grow w-full items-center space-y-5 ">
-                
-                <div>
+        <div>
                   { erro == 1? 
-                    <div className="flex items-center bg-red-200 shadow shadow-xl w-50 h-10 px-2 px-2 rounded-md mt-2">
-                        <p className="text-wh">{erroNome} !</p>
-                    </div>
-                    :<div></div>          
+                    <Box sx={{ width: '100%', position:'block' }}>
+                    <Collapse in={open}>
+                      <Alert
+                      severity="error"
+                        action={
+                          <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                              setOpen(false);
+                            }}
+                          >
+                            x
+                          </IconButton>
+                        }
+                        sx={{ mb: 2 }}
+                        >
+                        {erroNome}                     
+                      </Alert>
+                    </Collapse>
+                    
+                  </Box>
+                    :
+                    <div></div>          
                 }
                 {
                   erro == 2 ? 
-                  <div className="flex bg-green-200 w-50 h-10 px-2 rounded-md mt-2 items-center">
-                     <p className="text-wh">Agendados com sucesso !</p>
-                  </div>:
+                  <Box sx={{ width: '100%', display:'fixed' }}>
+                    <Collapse in={open}>
+                      <Alert
+                      severity="error"
+                        action={
+                          <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                              setOpen(false);
+                            }}
+                          >
+                            x
+                          </IconButton>
+                        }
+                        sx={{ mb: 2 }}
+                        >
+                        Agendado com sucesso!                     
+                      </Alert>
+                    </Collapse>
+                    
+                  </Box>
+                  :
                   <div></div> 
                 }
-                </div>
-
+        </div>
+        <div className="flex flex-col w-screen  md:w-[55rem] h-[44rem] space-y-4 mb-20 items-center  rounded-md shadow-2xl min-h-[43rem]">
+          
+            <div className="flex flex-col flex-grow w-full items-center space-y-5 ">
                 <div className="flex flex-col w-5/6 text-white mt-10">
                   <TextField
                     id="nome"
