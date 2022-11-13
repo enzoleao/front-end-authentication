@@ -50,7 +50,7 @@ function Agendamento() {
   });
   const enviarAgend=()=>{
       const value = `${newData.$D}/${newData.$M}/${newData.$y}`
-      Axios.post("https://191.101.78.120:3000/agend", {
+      Axios.post("https://api-agendamento-pmpa.herokuapp.com/agend", {
         values,
         value
       }).then((res)=>{
@@ -311,6 +311,7 @@ function Agendamento() {
                 }
             </div>
         </div>
+        <div className="w-full flex  items-center justify-center bg-slate-800 min-h-[3rem] text-white"><h1 className="text-center">Subseção de Identificação da PMPA &copy; Todos os direitos reservados. Contato </h1></div>
       </div>
   )
 }
