@@ -165,7 +165,7 @@ function Agendamento() {
                     type="number"
                     variant="standard"
                     onChange={handleChangeVal('telefone')}
-                    sx={{width:"140px"}}
+                    sx={{width:"170px"}}
                     onInput = {(e) =>{
                       e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,11)
                   }}
