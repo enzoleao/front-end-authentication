@@ -147,10 +147,14 @@ function Agendamento() {
                 <div className="flex flex-col w-5/6 text-white">
                   <TextField
                     id="rg"
+                    inputFormat="000.000.000-00"
                     label="CPF"
                     type="number"
                     variant="standard"
                     onChange={handleChangeVal('rg')}
+                    onInput = {(e) =>{
+                      e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,11)
+                  }}
                     sx={{width:'140px'}}
                   />
                 </div>
@@ -161,7 +165,10 @@ function Agendamento() {
                     type="number"
                     variant="standard"
                     onChange={handleChangeVal('telefone')}
-                    sx={{width:"200px"}}
+                    sx={{width:"140px"}}
+                    onInput = {(e) =>{
+                      e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,11)
+                  }}
                   />
                 </div>
                 <div className="flex flex-col w-5/6 text-white">
