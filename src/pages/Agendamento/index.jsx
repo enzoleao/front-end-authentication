@@ -53,9 +53,12 @@ function Agendamento() {
         values,
         value
       }).then((res)=>{
-        alert("AGENDADO COM SUCESSO")
-        window.location.replace('/')
         setErro(2)
+        alert("AGENDADO COM SUCESSO")
+        setOpen(true)
+        setTimeout(()=>{
+          window.location.replace('/')
+        },1000)
       }).catch((err)=>{
         setErroNome(err.response.data.message)
         setErro(1)
@@ -101,10 +104,10 @@ function Agendamento() {
                 }
                 {
                   erro == 2 ? 
-                  <Box sx={{ width: '100%', display:'fixed' }}>
+                  <Box sx={{ width: '100%', display:'block' }}>
                     <Collapse in={open}>
                       <Alert
-                      severity="error"
+                      severity="success"
                         action={
                           <IconButton
                             aria-label="close"
