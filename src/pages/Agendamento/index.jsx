@@ -50,7 +50,7 @@ function Agendamento() {
   });
   const enviarAgend=()=>{
       const value = `${newData.$D}/${newData.$M}/${newData.$y}`
-      Axios.post("https://localhost:3000/agend", {
+      Axios.post("https://191.101.78.120:3000/agend", {
         values,
         value
       }).then((res)=>{
