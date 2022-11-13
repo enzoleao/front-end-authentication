@@ -311,7 +311,7 @@ function Agendamento() {
                 }
             </div>
         </div>
-        <div className="w-full flex  items-center justify-center bg-slate-800 min-h-[3rem] text-white"><h1 className="text-center">Subseção de Identificação da PMPA &copy; Todos os direitos reservados. Contato </h1></div>
+        <div className="w-full flex  items-center justify-center bg-slate-800 min-h-[3rem] text-white"><h1 className="text-center">Subseção de Identificação da PMPA &copy; Todos os direitos reservados. Contato (91) 99302-5843</h1></div>
       </div>
   )
 }
