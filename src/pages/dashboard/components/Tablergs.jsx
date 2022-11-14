@@ -18,7 +18,7 @@ export default function Tablergs(){
   const [listRgs, setListRgs] = React.useState();
   
       const handleEditSubmit = () => {
-        Axios.put("https://191.101.78.120:3000/atualizarrg",{
+        Axios.put("https://api-agendamento-pmpa.herokuapp.com/atualizarrg",{
           values
         }).then((response)=>{
           alert("Alterado com sucesso!")
@@ -29,7 +29,7 @@ export default function Tablergs(){
         })
       };
       const deletarRg = ()=>{
-        Axios.delete(`https://191.101.78.120:3000/apagaridregistrado/${values.id}`)
+        Axios.delete(`https://api-agendamento-pmpa.herokuapp.com/apagaridregistrado/${values.id}`)
         .then((res)=>{
           alert("Deletado com sucesso")        
           setOpen(false)
@@ -49,16 +49,16 @@ export default function Tablergs(){
       };
 
     React.useEffect(()=>{
-        Axios.get("https://191.101.78.120:3000/getallcpf")
+        Axios.get("https://api-agendamento-pmpa.herokuapp.com/getallcpf")
         .then((response)=>{
             setListRgs(response.data)
         }); 
       },[])
     
       const columns = [
-        { field: 'id', headerName: 'ID', width: 70},
+        { field: 'id', headerName: 'ID', width: 140},
         { field: 'rg',headerName: 'CPF', width: 140},     
-        { field: 'Acoes', headerName: 'Acoes', width:90,
+        { field: 'Acoes', headerName: 'Acoes', width:140,
         renderCell: () => (
           <strong>
             
@@ -107,20 +107,23 @@ export default function Tablergs(){
                     <Button color="success" variant="outlined" onClick={handleEditSubmit}>Salvar</Button>
                   </DialogActions>
                 </Dialog>
-        
-        <DataGrid 
-            
-            rows={typeof listRgs !== "undefined" && listRgs.map((value)=>{
-            return (
-                {id:value.id, rg:value.cpf
-                }
-                )
-            })}
-            columns={columns}
-            pageSize={8}
-            rowsPerPageOptions={[5]}
-                          
-        />
+        <div className='flex flex-row w-full h-full justify-center items-center'>
+            <div className='h-full w-3/4'>
+                <DataGrid 
+                    sx={{display:'flex'}}
+                    rows={typeof listRgs !== "undefined" && listRgs.map((value)=>{
+                    return (
+                        {id:value.id, rg:value.cpf
+                        }
+                        )
+                    })}
+                    columns={columns}
+                    pageSize={8}
+                    rowsPerPageOptions={[5]}
+                                  
+                />
+            </div>
+        </div>
 
         </>
 

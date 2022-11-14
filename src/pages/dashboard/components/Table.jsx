@@ -17,10 +17,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 
+
 export default function Table(){
   const [locale, setLocale] = React.useState('pt-br');
-  const [value, setValue] = React.useState(null); 
+  const [data, setData] = React.useState('pt-br')
   const [open, setOpen] = React.useState(false);
+  const [listAgends, setListAgends] = React.useState();
       const handleOpen = () => {
         setOpen(true);
       };
@@ -41,15 +43,17 @@ export default function Table(){
         setValues({ ...values, [prop]: event.target.value });
       };
        
-    const [listAgends, setListAgends] = React.useState();
+
     React.useEffect(()=>{
-        Axios.get("https://191.101.78.120:3000/getinfo")
+        Axios.get("https://api-agendamento-pmpa.herokuapp.com/getinfo")
         .then((response)=>{
           setListAgends(response.data)
         }); 
       },[])
+
     const HandleEdit = () =>{
-      Axios.put("https://191.101.78.120:3000/atualizaragendamento",{
+      const value = `${data.$D}/${data.$M}/${data.$y}`
+      Axios.put("https://api-agendamento-pmpa.herokuapp.com/atualizaragendamento",{
         values,
         value
       }).then((res)=>{
@@ -62,7 +66,7 @@ export default function Table(){
       })
     }
     const handleDelete = () =>{
-      Axios.delete(`https://191.101.78.120:3000/apagaragendamento/${values.id}`)
+      Axios.delete(`https://api-agendamento-pmpa.herokuapp.com/apagaragendamento/${values.id}`)
       .then((res)=>{
         alert("DELETADO COM SUCESSO")
         setOpen(false)
@@ -101,8 +105,9 @@ export default function Table(){
       ];
     return (
         <>
+          
         <Dialog open={open} onClose={handleClose} >
-                  <DialogTitle>REMARCAR</DialogTitle>
+                  <DialogTitle>REMARCAR (PARA EXCLUIR INSIRA APENAS O ID)</DialogTitle>
                   <DialogContent >                                   
                       <div className='flex flex-col space-y-5'>
                       <TextField
@@ -137,11 +142,11 @@ export default function Table(){
                             	disablePast
                               shouldDisableDate={isWeekend}
                               openTo="day"
-                              inputFormat="DD-MM-YYYY"
+                              inputFormat="DD/MM/YYYY"
                               label="Escolha a Data"
-                              value={value}
+                              value={data}
                               onChange={(newValue) => {
-                                setValue(newValue.format("MM-DD-YYYY").toString());    
+                                setData(newValue);
                               }          
                             }
 
@@ -162,8 +167,7 @@ export default function Table(){
                                 onChange={handleChangeVal('horario')}
                                 sx={{width:'100px'}}
 
-                              >
-                                
+                              >   
                                 <MenuItem value="9:15">9:15</MenuItem>
                                 <MenuItem value="9:45">9:45</MenuItem>
                                 <MenuItem value="10:15">10:15</MenuItem>
@@ -174,8 +178,7 @@ export default function Table(){
                                 <MenuItem value="14:15">14:15</MenuItem>
                                 <MenuItem value="14:45">14:45</MenuItem>
                                 <MenuItem value="15:15" >15:15</MenuItem>
-                                <MenuItem value="15:45">15:45</MenuItem>
-                                
+                                <MenuItem value="15:45">15:45</MenuItem>                          
                               </Select>
                       </FormControl>
                       </div>

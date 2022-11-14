@@ -28,7 +28,7 @@ export default function Dashboard(){
     logout();
   }
   const cadastrarRg =()=>{
-      Axios.post("https://191.101.78.120:3000/inserirrgnovo",{
+      Axios.post("https://api-agendamento-pmpa.herokuapp.com/inserirrgnovo",{
         novoRg
       }).then((response)=>{
         alert("CPF INSERIDO COM SUCESSO")
@@ -41,7 +41,7 @@ export default function Dashboard(){
   }
     return (
         <div className="h-screen min-h-full w-screen md:w-full flex flex-col ">
-            <div className="w-full flex justify-end items-center px-2 h-14 bg-slate-700 "><Button onClick={handleLogout} variant="contained" color="error">Sair</Button></div>
+            <div className="min-w-full min-h-[3rem] flex justify-end items-center px-2 h-14 bg-slate-700 "><Button onClick={handleLogout} variant="contained" color="error">Sair</Button></div>
               <div className='w-full flex flex-col justify-center items-center space-y-2 mt-36'>
                 <div className='flex space-x-2'>
                     <Button variant="outlined" onClick={()=>setAgendados(1)}>AGENDADOS</Button>

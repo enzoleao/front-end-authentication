@@ -18,7 +18,7 @@ export const AuthProvider = ({children})=>{
     }, []);
     
     const login =(usuario, password)=>{
-        Axios.post("https://191.101.78.120:3000/realizarlogin", {
+        Axios.post("https://api-agendamento-pmpa.herokuapp.com/realizarlogin", {
             usuario, password
         }).then((res)=>{
             console.log(res)
