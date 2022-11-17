@@ -56,9 +56,9 @@ export default function Tablergs(){
       },[])
     
       const columns2 = [
-        { field: 'id', headerName: 'ID', width: 140},
-        { field: 'rg',headerName: 'CPF', width: 140},     
-        { field: 'Acoes', headerName: 'Acoes', width:140,
+        { field: 'id', headerName: 'ID', width: 190},
+        { field: 'rg',headerName: 'CPF', width: 500},     
+        { field: 'Acoes', headerName: 'Acoes', width:190,
         renderCell: () => (
           <strong>
             
@@ -115,9 +115,9 @@ export default function Tablergs(){
                   </DialogActions>
                 </Dialog>
         <div className='flex flex-row w-full h-full justify-center items-center'>
-            <div className='h-full w-3/4'>
+            <div className='h-full w-3/4 flex justify-center items-center'>
                 <DataGrid 
-                    sx={{display:'flex'}}
+                    sx={{display:'flex', width:'80%'}}
                     rows={typeof listRgs !== "undefined" && listRgs.map((value)=>{
                     return (
                         {id:value.id, rg:value.cpf
