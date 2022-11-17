@@ -52,7 +52,7 @@ export default function Table(){
       },[])
 
     const HandleEdit = () =>{
-      const value = `${data.$D}/${data.$M}/${data.$y}`
+      const value = `${data.$D}/${data.$M+1}/${data.$y}`
       Axios.put("https://api-agendamento-pmpa.herokuapp.com/atualizaragendamento",{
         values,
         value
@@ -75,16 +75,18 @@ export default function Table(){
         alert(err.response.data.message)
       })
     }
-      const columns = [
-        { field: 'id', headerName: 'ID', width: 70},
-        { field: 'nome', headerName: 'Nome', width: 300 },
-        { field: 'rg',headerName: 'CPF', width: 130},
-        { field: 'patente',headerName: 'Patente', width: 140},
-        { field: 'telefone',headerName: 'Telefone', width: 140},
-        { field: 'modelo',headerName: 'Modelo', width: 90 },
+    
+      const columns2 = [
+        { field: 'id', headerName: 'ID', width: 40},
+        { field: 'nome', headerName: 'Nome', width: 280 },
+        { field: 'rg',headerName: 'CPF', width: 120},
+        { field: 'patente',headerName: 'Patente', width: 120},
+        { field: 'telefone',headerName: 'Telefone', width: 120},
+        { field: 'modelo',headerName: 'Modelo', width: 80 },
         { field: 'lotacao',headerName: 'Lotacao', width: 90},
+        { field: 'polo',headerName: 'Polo', width: 140},
         { field: 'pa',headerName: 'P.A', width: 40},
-        { field: 'data',headerName: 'Data', width: 140},
+        { field: 'data',headerName: 'Data', width: 100},
         { field: 'horario',headerName: 'Horario', width: 90},
         { field: 'Acoes', headerName: 'Acoes', width:90,
         renderCell: () => (
@@ -103,6 +105,13 @@ export default function Table(){
       },
         
       ];
+      const columns = React.useMemo(
+        ()=>
+        columns2.map((col)=>
+        col.field == col.field ? {...col, sortable:false} : col,
+        ),
+        [columns2]
+      )
     return (
         <>
           
@@ -193,13 +202,13 @@ export default function Table(){
         <DataGrid
             rows={typeof listAgends !== "undefined" && listAgends.map((value)=>{
             return (
-                {id:value.id, nome:value.nome, rg:value.rg, patente:value.patente, telefone:value.telefone, modelo:value.modelo, lotacao:value.lotacao, pa:value.pa, data:value.data, horario:value.horario}
+                {id:value.id, nome:value.nome, rg:value.rg, patente:value.patente, telefone:value.telefone, modelo:value.modelo, lotacao:value.lotacao,polo:value.polo, pa:value.pa, data:value.data, horario:value.horario}
                 )
             })}
             columns={columns}
             pageSize={8}
             rowsPerPageOptions={[5]}
-                          
+            disableColumnSelector              
         />
 
         </>

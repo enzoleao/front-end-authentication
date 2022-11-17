@@ -49,7 +49,7 @@ function Agendamento() {
  
   });
   const enviarAgend=()=>{
-      const value = `${newData.$D}/${newData.$M}/${newData.$y}`
+      const value = `${newData.$D}/${newData.$M+1}/${newData.$y}`
       Axios.post("https://api-agendamento-pmpa.herokuapp.com/agend", {
         values,
         value

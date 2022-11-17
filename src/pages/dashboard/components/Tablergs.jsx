@@ -55,7 +55,7 @@ export default function Tablergs(){
         }); 
       },[])
     
-      const columns = [
+      const columns2 = [
         { field: 'id', headerName: 'ID', width: 140},
         { field: 'rg',headerName: 'CPF', width: 140},     
         { field: 'Acoes', headerName: 'Acoes', width:140,
@@ -75,6 +75,13 @@ export default function Tablergs(){
       },
         
       ];
+      const columns = React.useMemo(
+        ()=>
+        columns2.map((col)=>
+        col.field == col.field ? {...col, sortable:false} : col,
+        ),
+        [columns2]
+      )
     return (
         <>
         <Dialog open={open} onClose={handleClose} >
@@ -120,7 +127,7 @@ export default function Tablergs(){
                     columns={columns}
                     pageSize={8}
                     rowsPerPageOptions={[5]}
-                                  
+                    disableColumnSelector              
                 />
             </div>
         </div>
