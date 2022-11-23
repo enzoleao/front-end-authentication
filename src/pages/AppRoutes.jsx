@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom' 
-import Agendamento from './Agendamento'
 import Login from './login'
-import Dashboard from './dashboard'
+import Home from './home'
 import * as React from 'react';
 import {useContext} from "react";
 import { AuthProvider, AuthContext} from '../contexts/auth';
@@ -23,9 +22,8 @@ function AppRoutes() {
       <Router >
         <AuthProvider>
             <Routes>
-                <Route path='/' element={<Agendamento/>}/>
                 <Route path='/login' element={<Login/>}/>
-                <Route path='/dashboard' element={<Private><Dashboard/></Private>}/>
+                <Route path='/' element={<Private><Home/></Private>}/>
             </Routes>
         </AuthProvider>
       </Router>

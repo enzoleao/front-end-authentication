@@ -1,9 +1,9 @@
-import {iconUser} from "../icons"
+
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import React, {useState, useContext} from "react"
 import { AuthContext } from "../../contexts/auth";
-import Brasao from '../../public/brasao_pmpa.png'
+
 export default function Login(){
     const {authenticated, login} = useContext(AuthContext);
     const [usuario, setUsuario] = useState("");
@@ -15,9 +15,8 @@ export default function Login(){
     }
     return (
         <div className='h-screen min-h-full w-screen md:w-full flex flex-col py-20 items-center'>
-        <img src={Brasao} className="" style={{width:'100px'}}></img>
         <div className="flex flex-col justify-center space-y-36 w-[30rem] h-[38rem] rounded-md shadow shadow-2xl ">
-            <div className="w-full flex justify-center mt-10">{iconUser}</div>
+            <div className="w-full flex justify-center mt-10"></div>
             <div className="w-full flex flex-col h-[20rem] space-y-7">
                 <div className="w-full flex justify-center">   
                     <TextField 

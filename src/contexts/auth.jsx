@@ -18,24 +18,28 @@ export const AuthProvider = ({children})=>{
     }, []);
     
     const login =(usuario, password)=>{
-        Axios.post("https://api-agendamento-pmpa.herokuapp.com/realizarlogin", {
+        Axios.post("http://localhost:3001/realizarlogin", {
             usuario, password
         }).then((res)=>{
-            console.log(res)
-            localStorage.setItem("user", JSON.stringify(res.data))
+            localStorage.setItem("user", JSON.stringify(res.data.user))
+            localStorage.setItem("token", JSON.stringify(res.data.token))
+            localStorage.setItem("auth", JSON.stringify(res.data.auth))
+
             if (res.status == 200){
-                window.location.replace('/dashboard')
+             window.location.replace('/')
             }                   
         }).catch((err)=>{
-            alert(err.response.data)
+            console.log(err.response.data)
         })
         
         
       
     }
     const logout=()=>{
-      console.log('logout');
       localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('auth');
         setUser(null);
         navigate('/login')
     }
